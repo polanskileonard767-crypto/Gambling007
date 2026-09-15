@@ -1,28 +1,26 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GAMBLING 007 — Arcade Network</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GAMBLING 007 — Arcade</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="boot"><div class="boot-logo">007</div><div class="boot-bar"><i></i></div><span>INITIALIZING ARCADE NETWORK…</span></div>
+<div id="boot"><div class="boot-logo">007</div><div class="boot-bar"><i></i></div><span>ARCADE LOADING…</span></div>
 <div class="bg-grid"></div><div class="scanlines"></div>
-<header class="topbar"><div class="brand"><span class="brand-mark">007</span><div><b>GAMBLING</b><small>ARCADE NETWORK</small></div></div><div class="top-actions"><button id="soundBtn" class="icon-btn">🔊</button><div class="balance"><span>ARCADE SCORE</span><strong id="coins">10,000</strong></div><button id="profileBtn" class="profile">AGENT <span id="agentName">007</span></button></div></header>
+<header class="topbar"><div class="brand"><span class="brand-mark">007</span><div><b>GAMBLING</b><small>ARCADE</small></div></div><div class="top-actions"><button id="soundBtn" class="icon-btn">🔊</button><div class="balance"><span>SCORE</span><strong id="coins">10.000</strong></div><button id="profileBtn" class="profile">ACCOUNT <span id="agentName">007</span></button></div></header>
 <main>
-<section class="hero"><div><div class="eyebrow">◆ CLASSIFIED // SKILL NETWORK</div><h1>ENTER THE <span>007.</span></h1><p>Eine neon-dunkle Agenten-Arcade mit Skill-Challenges, Missionen, XP, Events und heftigen Animationen.</p><div class="hero-actions"><button class="primary" data-game="reflex">START MISSION <span>↗</span></button><button class="ghost" id="missionsBtn">MISSIONS</button></div></div><div class="agent-card"><div class="radar"></div><div class="agent-info"><small>ACTIVE AGENT</small><b id="heroName">007</b><span>LEVEL <i id="level">1</i> · <i id="xp">0</i>/100 XP</span></div></div></section>
-<section class="ticker"><span>LIVE EVENT</span><b id="eventText">NIGHT OPS — ACTIVE</b><i></i><span>NETWORK</span><b>ONLINE</b></section>
-<section class="games"><div class="section-head"><div><small>ARCADE // 01</small><h2>SELECT MISSION</h2></div><span id="gameCount">06 MISSIONS ONLINE</span></div><div class="game-grid">
-<button class="game-card slots-card" data-game="reflex"><div class="game-art"><div class="slot-machine"><span>0</span><span>0</span><span>7</span></div></div><div class="game-copy"><b>CODE BREAKER</b><small>3 DIGITS // SPEED TEST</small><strong>PLAY →</strong></div></button>
-<button class="game-card roulette-card" data-game="wheel"><div class="game-art"><div class="roulette-wheel"><div class="wheel-dot"></div></div></div><div class="game-copy"><b>PRECISION WHEEL</b><small>TIMING // HIT THE ZONE</small><strong>PLAY →</strong></div></button>
-<button class="game-card mines-card" data-game="memory"><div class="game-art"><div class="mine-grid">${'<i></i>'.repeat(25)}</div></div><div class="game-copy"><b>GRID OPS</b><small>MEMORY // FIND THE SIGNAL</small><strong>PLAY →</strong></div></button>
-<button class="game-card dice-card" data-game="dice"><div class="game-art"><div class="dice">7</div></div><div class="game-copy"><b>DICE REACTION</b><small>REFLEX // TARGET NUMBER</small><strong>PLAY →</strong></div></button>
-<button class="game-card slots-card" data-game="sequence"><div class="game-art"><div class="slot-machine"><span>◆</span><span>◇</span><span>◆</span></div></div><div class="game-copy"><b>SEQUENCE 007</b><small>PATTERN // RECALL</small><strong>PLAY →</strong></div></button>
-<button class="game-card roulette-card" data-game="target"><div class="game-art"><div class="target-art"><b>+</b></div></div><div class="game-copy"><b>TARGET LOCK</b><small>AIM // CLICK THE CORE</small><strong>PLAY →</strong></div></button>
+<section class="hero"><div><div class="eyebrow">◆ 007 ARCADE</div><h1>CHOOSE YOUR <span>GAME.</span></h1><p>Einfach Spiel auswählen und direkt losspielen.</p></div><div class="agent-card"><div class="radar"></div><div class="agent-info"><small>PLAYER</small><b id="heroName">007</b><span>SCORE <i id="level">10.000</i></span></div></div></section>
+<section class="games"><div class="section-head"><div><small>ARCADE</small><h2>SPIELE</h2></div><span>6 SPIELE</span></div><div class="game-grid">
+<button class="game-card slots-card" data-game="reflex"><div class="game-art"><div class="slot-machine"><span>0</span><span>0</span><span>7</span></div></div><div class="game-copy"><b>SLOT 007</b><small>START · SPIELEN</small><strong>SPIELEN →</strong></div></button>
+<button class="game-card roulette-card" data-game="wheel"><div class="game-art"><div class="roulette-wheel"><div class="wheel-dot"></div></div></div><div class="game-copy"><b>ROULETTE</b><small>STOPPE DEN MARKER</small><strong>SPIELEN →</strong></div></button>
+<button class="game-card mines-card" data-game="memory"><div class="game-art"><div class="mine-grid"></div></div><div class="game-copy"><b>MINES</b><small>FINDE DAS FELD</small><strong>SPIELEN →</strong></div></button>
+<button class="game-card dice-card" data-game="dice"><div class="game-art"><div class="dice">6</div></div><div class="game-copy"><b>DICE</b><small>WÜRFELN</small><strong>SPIELEN →</strong></div></button>
+<button class="game-card slots-card" data-game="sequence"><div class="game-art"><div class="slot-machine"><span>◆</span><span>◇</span><span>◆</span></div></div><div class="game-copy"><b>SEQUENCE</b><small>MERKEN</small><strong>SPIELEN →</strong></div></button>
+<button class="game-card roulette-card" data-game="target"><div class="game-art"><div class="target-art"><b>+</b></div></div><div class="game-copy"><b>TARGET</b><small>TREFFEN</small><strong>SPIELEN →</strong></div></button>
 </div></section>
-<section class="dashboard"><div class="panel"><small>DAILY MISSION</small><h3>COMPLETE 5 MISSIONS</h3><div class="progress"><i id="missionProgress"></i></div><div class="panel-row"><span id="missionText">0 / 5 missions</span><b>+500 XP</b></div></div><div class="panel"><small>RECENT RUN</small><div id="history" class="history"><span>NO MISSIONS YET</span></div></div><div class="panel"><small>SYSTEM</small><h3>ANTI-SCORE FARM</h3><p>Cooldowns, local integrity checks and capped daily score gains are enabled.</p></div></section>
 </main>
 <div id="modal" class="modal hidden"><div class="modal-box"><button id="closeModal" class="close">×</button><div id="modalContent"></div></div></div>
 <div id="toast" class="toast"></div>
