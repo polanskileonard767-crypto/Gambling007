@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GAMBLING 007 — Arcade Casino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="boot"><div class="boot-logo">007</div><div class="boot-bar"><i></i></div><span>INITIALIZING ARCADE SYSTEM…</span></div>
+<div class="bg-grid"></div><div class="scanlines"></div>
+<header class="topbar"><div class="brand"><span class="brand-mark">007</span><div><b>GAMBLING</b><small>ARCADE SYSTEM</small></div></div><div class="top-actions"><button id="soundBtn" class="icon-btn">🔊</button><div class="balance"><span>COINS</span><strong id="coins">10,000</strong></div><button id="profileBtn" class="profile">AGENT <span id="agentName">007</span></button></div></header>
+<main>
+<section class="hero"><div><div class="eyebrow">◆ CLASSIFIED // ARCADE NETWORK</div><h1>PLAY THE <span>ODDS.</span></h1><p>Ein neon-dunkles Arcade-Casino mit virtuellen Coins, Events, Missionen und heftigen Effekten.</p><div class="hero-actions"><button class="primary" data-game="slots">PLAY NOW <span>↗</span></button><button class="ghost" id="missionsBtn">MISSIONS</button></div></div><div class="agent-card"><div class="radar"></div><div class="agent-info"><small>ACTIVE AGENT</small><b id="heroName">007</b><span>LEVEL <i id="level">1</i> · <i id="xp">0</i>/100 XP</span></div></div></section>
+<section class="ticker"><span>LIVE EVENT</span><b id="eventText">DOUBLE XP — 07:00 MIN</b><i></i><span>HOUSE STATUS</span><b>ONLINE</b></section>
+<section class="games"><div class="section-head"><div><small>ARCADE // 01</small><h2>CHOOSE YOUR GAME</h2></div><span id="gameCount">04 GAMES ONLINE</span></div><div class="game-grid">
+<button class="game-card slots-card" data-game="slots"><div class="game-art"><div class="slot-machine"><span>7</span><span>★</span><span>7</span></div></div><div class="game-copy"><b>SLOT 007</b><small>TRIPLE REEL // JACKPOT</small><strong>PLAY →</strong></div></button>
+<button class="game-card roulette-card" data-game="roulette"><div class="game-art"><div class="roulette-wheel"><div class="wheel-dot"></div></div></div><div class="game-copy"><b>ROULETTE</b><small>LIVE WHEEL // RED OR BLACK</small><strong>PLAY →</strong></div></button>
+<button class="game-card mines-card" data-game="mines"><div class="game-art mines-art"><div class="mine-grid">${'<i></i>'.repeat(25)}</div></div><div class="game-copy"><b>MINES</b><small>GRID // RISK & REWARD</small><strong>PLAY →</strong></div></button>
+<button class="game-card dice-card" data-game="dice"><div class="game-art"><div class="dice">7</div></div><div class="game-copy"><b>DICE</b><small>HIGH / LOW // DOUBLE OR NOTHING</small><strong>PLAY →</strong></div></button>
+</div></section>
+<section class="dashboard"><div class="panel"><small>DAILY MISSION</small><h3>PLAY 5 ROUNDS</h3><div class="progress"><i id="missionProgress"></i></div><div class="panel-row"><span id="missionText">0 / 5 rounds</span><b>+500 XP</b></div></div><div class="panel"><small>RECENT RUN</small><div id="history" class="history"><span>NO ROUNDS YET</span></div></div><div class="panel"><small>SECURITY</small><h3>ANTI-FARM ACTIVE</h3><p>Round limits, cooldowns and server-ready economy rules are enabled.</p></div></section>
+</main>
+<div id="modal" class="modal hidden"><div class="modal-box"><button id="closeModal" class="close">×</button><div id="modalContent"></div></div></div>
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body></html>
