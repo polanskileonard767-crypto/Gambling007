@@ -1,21 +1,38 @@
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const KEY='g007_simple_v1';
-const state=JSON.parse(localStorage.getItem(KEY)||'null')||{name:'007',score:10000,sound:true};
+const KEY='g007_easy_v2';
+const state=JSON.parse(localStorage.getItem(KEY)||'null')||{score:10000};
+const $=s=>document.querySelector(s);
 const save=()=>localStorage.setItem(KEY,JSON.stringify(state));
 const fmt=n=>Math.max(0,Math.floor(n)).toLocaleString('de-DE');
-let audioCtx=null;
-function beep(f=440,d=.08){if(!state.sound)return;if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.frequency.value=f;g.gain.setValueAtTime(.0001,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.04,audioCtx.currentTime+.01);g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+d);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+d+.02)}
-function render(){if($('#coins'))$('#coins').textContent=fmt(state.score);if($('#agentName'))$('#agentName').textContent=state.name;if($('#heroName'))$('#heroName').textContent=state.name}
-function result(text,good=true){const e=$('#gameResult');if(e){e.textContent=text;e.dataset.good=good?'1':'0'};good?beep(820):beep(150);save();render()}
-function openGame(type){$('#modal').classList.remove('hidden');const c=$('#modalContent');({reflex:slots,wheel:wheel,memory:mines,dice:dice,sequence:sequence,target:target}[type]||slots)(c)}
-const head=(title,text)=>`<h2 class="modal-title">${title}</h2><p class="modal-sub">${text}</p>`;
-function slots(c){c.innerHTML=head('SLOT 007','Drück START und versuche die 007-Kombination zu treffen.')+`<div class="big-slots"><span id="s1">7</span><span id="s2">0</span><span id="s3">0</span></div><button class="action big-action" id="go">START</button><p class="modal-sub" id="gameResult">Bereit.</p>`;$('#go').onclick=()=>{const a=[0,1,2].map(()=>Math.floor(Math.random()*10));$('#s1').textContent=a[0];$('#s2').textContent=a[1];$('#s3').textContent=a[2];if(a.join('')==='007'){state.score+=500;result('007! +500 SCORE')}else{result('Nope. Nochmal.',false)}}}
-function wheel(c){c.innerHTML=head('ROULETTE','Stoppe den Marker im markierten Bereich.')+`<div class="simple-wheel"><div id="wheelNeedle"></div></div><button class="action big-action" id="go">STOPP</button><p class="modal-sub" id="gameResult">Drehung läuft…</p>`;let angle=0,running=true;const n=$('#wheelNeedle');const loop=()=>{if(!running)return;angle=(angle+6)%360;n.style.transform=`rotate(${angle}deg)`;requestAnimationFrame(loop)};loop();$('#go').onclick=()=>{if(!running)return;running=false;const hit=angle>45&&angle<95;if(hit){state.score+=300;result('TREFFER! +300 SCORE')}else result('Daneben. Nochmal.',false)}}
-function mines(c){c.innerHTML=head('MINES','Finde das grüne Feld. 5 Versuche.')+`<div class="simple-mines">${Array.from({length:25},(_,i)=>`<button data-i="${i}">?</button>`).join('')}</div><p class="modal-sub" id="gameResult">Such ein Feld.</p>`;const win=Math.floor(Math.random()*25);$$('.simple-mines button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(i===win){b.textContent='✓';state.score+=250;result('GEFUNDEN! +250 SCORE')}else{b.textContent='×';result('Falsch.',false)}})}
-function dice(c){c.innerHTML=head('DICE','Drück START und würfle eine Zahl.')+`<div class="dice-result" id="die">?</div><button class="action big-action" id="go">START</button><p class="modal-sub" id="gameResult">Bereit.</p>`;$('#go').onclick=()=>{const n=Math.floor(Math.random()*6)+1;$('#die').textContent=n;if(n===6){state.score+=200;result('6! +200 SCORE')}else result(n+' — nochmal versuchen',false)}}
-function sequence(c){const target=[...Array(4)].map(()=>Math.floor(Math.random()*4));c.innerHTML=head('SEQUENCE','Merke dir die Reihenfolge und tippe sie nach.')+`<div class="seq-display" id="seq">${target.map(x=>x+1).join(' · ')}</div><div class="sequence-grid">${[0,1,2,3].map(i=>`<button class="sequence-cell" data-i="${i}">${i+1}</button>`).join('')}</div><p class="modal-sub" id="gameResult">Tippe die Zahlen in der richtigen Reihenfolge.</p>`;let pos=0;setTimeout(()=>$('#seq').textContent='?',1200);$$('.sequence-cell').forEach(b=>b.onclick=()=>{if(+b.dataset.i!==target[pos]){result('Falsch.',false);pos=0;return}pos++;if(pos===target.length){state.score+=350;result('RICHTIG! +350 SCORE');pos=0}})}
-function target(c){c.innerHTML=head('TARGET','Triff den Punkt so oft du kannst.')+`<div class="target-zone" id="targetZone"><button class="target-core" id="targetCore">+</button></div><p class="modal-sub" id="gameResult">Treffer: 0</p>`;const z=$('#targetZone'),core=$('#targetCore');let hits=0;function move(){core.style.left=Math.max(5,Math.random()*(z.clientWidth-55))+'px';core.style.top=Math.max(5,Math.random()*(z.clientHeight-55))+'px'}move();core.onclick=()=>{hits++;state.score+=50;result('Treffer: '+hits+'  +50 SCORE');move()}}
-function profile(){const c=$('#modalContent');$('#modal').classList.remove('hidden');c.innerHTML=head('ACCOUNT','Dein Name wird nur auf diesem Gerät gespeichert.')+`<div class="game-controls"><input id="nameInput" class="text-input" maxlength="14" value="${state.name}"><button class="action" id="saveProfile">SPEICHERN</button></div>`;$('#saveProfile').onclick=()=>{state.name=$('#nameInput').value.trim()||'007';save();close();render()}}
-function close(){$('#modal').classList.add('hidden')}
-$('#closeModal').onclick=close;$('#modal').onclick=e=>{if(e.target.id==='modal')close()};$$('[data-game]').forEach(b=>b.onclick=()=>openGame(b.dataset.game));$('#profileBtn').onclick=profile;$('#soundBtn').onclick=()=>{state.sound=!state.sound;$('#soundBtn').textContent=state.sound?'🔊':'🔇';if(state.sound)beep(700)};
-render();
+const score=()=>$('#score').textContent=fmt(state.score);
+const modal=$('#modal');
+const game=$('#game');
+function close(){modal.classList.add('hidden');}
+function open(content){game.innerHTML=content;modal.classList.remove('hidden');}
+function add(points){state.score+=points;save();score();}
+function msg(text,good=true){const e=$('#result');if(e){e.textContent=text;e.className=good?'result good':'result';}}
+
+function slots(){
+ open(`<h2>SLOT 007</h2><p>Drück START und versuche <b>0 · 0 · 7</b> zu treffen.</p><div class="reels"><span id="r1">0</span><span id="r2">0</span><span id="r3">7</span></div><button class="play" id="start">START</button><div id="result" class="result">Bereit.</div>`);
+ $('#start').onclick=()=>{const a=[0,1,2].map(()=>Math.floor(Math.random()*10));['r1','r2','r3'].forEach((id,i)=>$('#'+id).textContent=a[i]);if(a.join('')==='007'){add(500);msg('🎯 007 getroffen! +500 SCORE')}else msg('Noch nicht — nochmal!')};
+}
+function dice(){
+ open(`<h2>DICE</h2><p>Drück den Button und würfle.</p><div id="die" class="big-number">?</div><button class="play" id="roll">WÜRFELN</button><div id="result" class="result">Bereit.</div>`);
+ $('#roll').onclick=()=>{const n=Math.floor(Math.random()*6)+1;$('#die').textContent=n;if(n===6){add(200);msg('🎲 6! +200 SCORE')}else msg(n+' — versuch es nochmal.')};
+}
+function mines(){
+ open(`<h2>MINES</h2><p>Finde das geheime Zielfeld.</p><div class="board">${Array(9).fill(0).map((_,i)=>`<button data-i="${i}">?</button>`).join('')}</div><div id="result" class="result">Such ein Feld.</div>`);
+ const win=Math.floor(Math.random()*9);let done=false;
+ document.querySelectorAll('.board button').forEach(b=>b.onclick=()=>{if(done)return;const i=+b.dataset.i;if(i===win){b.textContent='✓';done=true;add(250);msg('💎 Gefunden! +250 SCORE')}else{b.textContent='×';b.disabled=true;msg('Falsch. Probier ein anderes Feld.')}});
+}
+function target(){
+ open(`<h2>TARGET</h2><p>Klicke den Punkt. Jeder Treffer gibt SCORE.</p><div id="targetZone" class="target-zone"><button id="targetCore">+</button></div><div id="result" class="result">Treffer: 0</div>`);
+ const z=$('#targetZone'),t=$('#targetCore');let hits=0;
+ function move(){t.style.left=Math.max(5,Math.random()*(z.clientWidth-55))+'px';t.style.top=Math.max(5,Math.random()*(z.clientHeight-55))+'px'}
+ move();t.onclick=()=>{hits++;add(50);msg('🎯 Treffer '+hits+'! +50 SCORE');move()};
+}
+
+document.querySelectorAll('[data-game]').forEach(b=>b.onclick=()=>({slots,dice,mines,target}[b.dataset.game])());
+$('#close').onclick=close;
+modal.onclick=e=>{if(e.target===modal)close()};
+$('#reset').onclick=()=>{state.score=10000;save();score()};
+score();
