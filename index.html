@@ -1,28 +1,42 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>GAMBLING 007 — Arcade</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GAMBLING 007 — Arcade Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="boot"><div class="boot-logo">007</div><div class="boot-bar"><i></i></div><span>ARCADE LOADING…</span></div>
-<div class="bg-grid"></div><div class="scanlines"></div>
-<header class="topbar"><div class="brand"><span class="brand-mark">007</span><div><b>GAMBLING</b><small>ARCADE</small></div></div><div class="top-actions"><button id="soundBtn" class="icon-btn">🔊</button><div class="balance"><span>SCORE</span><strong id="coins">10.000</strong></div><button id="profileBtn" class="profile">ACCOUNT <span id="agentName">007</span></button></div></header>
+<div class="bg-grid"></div>
+<header class="topbar">
+  <div class="brand"><span>007</span><div><b>GAMBLING 007</b><small>ARCADE DEMO</small></div></div>
+  <div class="score"><small>VIRTUAL SCORE</small><strong id="score">10.000</strong></div>
+  <button id="reset" class="reset">RESET</button>
+</header>
 <main>
-<section class="hero"><div><div class="eyebrow">◆ 007 ARCADE</div><h1>CHOOSE YOUR <span>GAME.</span></h1><p>Einfach Spiel auswählen und direkt losspielen.</p></div><div class="agent-card"><div class="radar"></div><div class="agent-info"><small>PLAYER</small><b id="heroName">007</b><span>SCORE <i id="level">10.000</i></span></div></div></section>
-<section class="games"><div class="section-head"><div><small>ARCADE</small><h2>SPIELE</h2></div><span>6 SPIELE</span></div><div class="game-grid">
-<button class="game-card slots-card" data-game="reflex"><div class="game-art"><div class="slot-machine"><span>0</span><span>0</span><span>7</span></div></div><div class="game-copy"><b>SLOT 007</b><small>START · SPIELEN</small><strong>SPIELEN →</strong></div></button>
-<button class="game-card roulette-card" data-game="wheel"><div class="game-art"><div class="roulette-wheel"><div class="wheel-dot"></div></div></div><div class="game-copy"><b>ROULETTE</b><small>STOPPE DEN MARKER</small><strong>SPIELEN →</strong></div></button>
-<button class="game-card mines-card" data-game="memory"><div class="game-art"><div class="mine-grid"></div></div><div class="game-copy"><b>MINES</b><small>FINDE DAS FELD</small><strong>SPIELEN →</strong></div></button>
-<button class="game-card dice-card" data-game="dice"><div class="game-art"><div class="dice">6</div></div><div class="game-copy"><b>DICE</b><small>WÜRFELN</small><strong>SPIELEN →</strong></div></button>
-<button class="game-card slots-card" data-game="sequence"><div class="game-art"><div class="slot-machine"><span>◆</span><span>◇</span><span>◆</span></div></div><div class="game-copy"><b>SEQUENCE</b><small>MERKEN</small><strong>SPIELEN →</strong></div></button>
-<button class="game-card roulette-card" data-game="target"><div class="game-art"><div class="target-art"><b>+</b></div></div><div class="game-copy"><b>TARGET</b><small>TREFFEN</small><strong>SPIELEN →</strong></div></button>
-</div></section>
+  <section class="hero">
+    <div>
+      <div class="eyebrow">◆ 007 ARCADE</div>
+      <h1>WÄHLE EIN<br><span>SPIEL.</span></h1>
+      <p>Ein Klick. Ein Spiel. Fertig. Alles läuft nur mit virtuellen Punkten — kein echtes Geld.</p>
+    </div>
+    <div class="hero-card"><b>007</b><span>READY TO PLAY</span><i>● SYSTEM ONLINE</i></div>
+  </section>
+
+  <section class="games">
+    <div class="section-head"><div><small>SPIELE</small><h2>PLAY NOW</h2></div><span>4 MINI-GAMES</span></div>
+    <div class="game-grid">
+      <button class="game-card" data-game="slots"><div class="art slots-art"><div class="slots"><i>0</i><i>0</i><i>7</i></div></div><b>SLOT 007</b><small>3 Zahlen · 007 treffen</small><strong>SPIELEN →</strong></button>
+      <button class="game-card" data-game="dice"><div class="art dice-art"><div class="dice">?</div></div><b>DICE</b><small>Eine Zahl würfeln</small><strong>SPIELEN →</strong></button>
+      <button class="game-card" data-game="mines"><div class="art mines-art"><div class="mini-grid">${Array(9).fill('<i></i>').join('')}</div></div><b>MINES</b><small>Finde das Ziel</small><strong>SPIELEN →</strong></button>
+      <button class="game-card" data-game="target"><div class="art target-art"><div class="target">+</div></div><b>TARGET</b><small>Klicke den Punkt</small><strong>SPIELEN →</strong></button>
+    </div>
+  </section>
 </main>
-<div id="modal" class="modal hidden"><div class="modal-box"><button id="closeModal" class="close">×</button><div id="modalContent"></div></div></div>
-<div id="toast" class="toast"></div>
+<div id="modal" class="modal hidden"><div class="modal-box"><button id="close" class="close">×</button><div id="game"></div></div></div>
 <script src="app.js"></script>
-</body></html>
+</body>
+</html>
